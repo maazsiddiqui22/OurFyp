@@ -13,6 +13,10 @@ import numpy as np
 import cv2
 import time
 import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
+
 
 def login(request):
 
@@ -44,9 +48,18 @@ def register_user(request):
        username = request.POST['username']
        email = request.POST['email']
        password = request.POST['password']
+       dob =request.POST['dob'].split('-')
+       dob = dob[0]
+       country= request.POST['country']
+       gender =request.POST['gender']
+       if(gender=='Male'):
+           group= relearnKnn(1,int(dob))
+       else:
+           group= relearnKnn(0,int(dob))
 
+       
 
-       obj = Userlogin(username=username,email=email,password=password)
+       obj = Userlogin(username=username,email=email,password=password,gender=gender,country=country,dob=dob ,group = group)
        obj.save()
 
        return redirect('login')
@@ -54,6 +67,28 @@ def register_user(request):
 
 def logout(request):
     return "hello" 
+
+
+def relearnKnn(a,b):
+    
+    dataset =pd.read_csv('dataForKnn.csv')
+
+    le = preprocessing.LabelEncoder()
+    genderEncoded=le.fit_transform( dataset['Gender'])
+    genderEncoded = pd.DataFrame(genderEncoded)
+    countryEncoded = le.fit_transform( dataset['Country'])
+    countryEncoded =pd.DataFrame(countryEncoded)
+    x =pd.concat( [genderEncoded,dataset['Year']],axis=1)
+    y = pd.DataFrame(dataset['Label'])
+
+    X_train, X_test, y_train, y_test = train_test_split(x, y, random_state=1)
+
+    knn = KNeighborsClassifier(n_neighbors=5)
+    knn.fit(X_train, y_train)
+    result = knn.predict([[a,b]])
+    return result[0]
+
+
 
 def detect(request):
     # Create the model
