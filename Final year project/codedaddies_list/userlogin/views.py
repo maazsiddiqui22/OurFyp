@@ -52,14 +52,22 @@ def register_user(request):
        dob = dob[0]
        country= request.POST['country']
        gender =request.POST['gender']
-       if(gender=='Male'):
-           group= relearnKnn(1,int(dob))
+       similarity = request.POST['similarity']
+       domain = request.POST['domain']
+       education = request.POST['education']
+       if('y' in similarity or 'Y' in similarity):
+           similarity='1'
        else:
-           group= relearnKnn(0,int(dob))
+            similarity ='0'
+    #    if(gender=='Male'):
+    #        group= relearnKnn(1,int(dob))
+    #    else:
+    #        group= relearnKnn(0,int(dob))
 
-       
+       print('sim,dom=',similarity, domain,education)
 
-       obj = Userlogin(username=username,email=email,password=password,gender=gender,country=country,dob=dob ,group = group)
+       obj = Userlogin(username=username,email=email,password=password,gender=gender,country=country,dob=dob, similarity=similarity, 
+       domain=domain,education =education )
        obj.save()
 
        return redirect('login')

@@ -8,13 +8,14 @@ BASE_CRAIGSLIST_URL = 'https://losangeles.craigslist.org/search/sss?query={}'
 BASE_IMAGE_URL = 'https://images.craigslist.org/{}_300x300.jpg'
 
 def website2(request):
-    file = open('result.txt' ,'r')
-    moodRead = file.readline().split(',')
-    bg_Color = moodRead[0]
-    mood = moodRead[2]
-    btnColor = moodRead[1]
-    print(btnColor)
-    style={'bgColor': bg_Color, 'btnColor':btnColor}
+    # file = open('result.txt' ,'r')
+    # moodRead = file.readline().split(',')
+    # bg_Color = moodRead[0]
+    # mood = moodRead[2]
+    # btnColor = moodRead[1]
+    # print(btnColor)
+    
+    style={'light':'#ffe066', 'dark':'#ffcc00'}
     return render(request,'website2.html',style)
 
 def home(request):

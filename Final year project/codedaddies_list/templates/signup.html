@@ -54,13 +54,32 @@
             <input type="text" class="form-control" name="country" placeholder="Where do you live" >
         </div>
         <div class="form-group">
+            <label for="Domain">Domain:</label>
+            <select  class='form-group' name="domain" id="domain">
+                <option value="0">Unemployed</option>  
+                <option value="1">Business</option>
+                <option value="2">Job</option>            
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Education">Education:</label>
+            <select  class='form-group' name="education" id="education">
+                <option value="0">School</option>
+                <option value="1">College</option> 
+                <option value="2">Under-grad</option>
+                <option value="3">Masters</option> 
+                <option value="4">PhD</option>            
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="BirthDay">Date of Birth:</label>
             <input type="date" class="form-control"  name="dob">
         </div>
-        <div class='from-group'>
+        <div class='form-group'>
             <label for="gender">Gender:</label>
-
-            <select name="gender" id="gender">
+            <select  class='form-group' name="gender" id="gender">
             <option value="Male">Male</option>
             <option value="Female">Female</option>            
             </select>
@@ -73,6 +92,12 @@
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" class="form-control" name="password" placeholder="Password" >
+        </div>
+        <div class="form-group">
+            <label for="similarity"> Have you used any similar website? </label>
+            <input type="text" class="form-control" name="similarity" placeholder="Yes" >
+        
+            
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Singup</button>
