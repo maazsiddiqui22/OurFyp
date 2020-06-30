@@ -43,6 +43,8 @@ def login(request):
 def signup(request):
     return render(request,'signup.html')
 
+
+
 def register_user(request):
     if request.POST:
        username = request.POST['username']
@@ -55,19 +57,18 @@ def register_user(request):
        similarity = request.POST['similarity']
        domain = request.POST['domain']
        education = request.POST['education']
+       age =2020-int(dob)
        if('y' in similarity or 'Y' in similarity):
            similarity='1'
+           print((int(education),age,0,int(gender)))
+           group = getCluster(int(education),age,1,int(gender))
        else:
-            similarity ='0'
-    #    if(gender=='Male'):
-    #        group= relearnKnn(1,int(dob))
-    #    else:
-    #        group= relearnKnn(0,int(dob))
-
-       print('sim,dom=',similarity, domain,education)
+           similarity ='0'
+           print((int(education),age,0,int(gender)))
+           group = getCluster(int(education),age,0,int(gender))
 
        obj = Userlogin(username=username,email=email,password=password,gender=gender,country=country,dob=dob, similarity=similarity, 
-       domain=domain,education =education )
+       domain=domain,education =education,group=group )
        obj.save()
 
        return redirect('login')
@@ -75,6 +76,48 @@ def register_user(request):
 
 def logout(request):
     return "hello" 
+
+def normalize(array,max,min):
+    arr_to = []
+    for element in array:
+        arr_to.append((max-int(element))/(max-min) )
+    return arr_to
+
+
+def clusteringKMEAN():
+    from sklearn import preprocessing
+    from sklearn.cluster import KMeans
+    import pickle
+    print('clustering .. .. ..')
+    data = pd.read_csv('data.csv')
+    max=data['Age'].max()
+    min=data['Age'].min()
+    array_age = normalize( data['Age'],max,min)
+    array_age = pd.DataFrame(array_age,columns=['Age'])
+    data2 = pd.concat([ data['Education'],array_age['Age'],data['Similarity'],data['Gender']],axis=1 )
+    clustering = KMeans(n_clusters=4, random_state=0).fit(data2)
+    filename = 'finalized_model.pkl'
+    pickle.dump(clustering, open(filename, 'wb'))
+   
+    
+
+def getCluster(education,age,smilarity,gender):
+    import pickle
+    data = pd.read_csv('data.csv')
+    max=data['Age'].max()
+    min=data['Age'].min()
+    age = (max-age)/(max-min)
+    import os
+
+    if os.path.isfile('finalized_model.sav'):
+        pass
+    else:
+        clusteringKMEAN()
+    clustering = pickle.load(open('finalized_model.pkl', 'rb'))
+    result = clustering.predict([[education,age,smilarity,gender]])
+        
+    return result[0]
+ 
 
 
 def relearnKnn(a,b):

@@ -7,7 +7,7 @@ class Userlogin (models.Model):
     dob= models.CharField('DOB' ,default='1997', max_length=100)
     email= models.CharField('Email' , max_length=100)
     password= models.CharField('Password',max_length=20)
-    gender = models.CharField('Gender',default='Male',max_length=9)
+    gender = models.CharField('Gender',default='1',max_length=9)
     group = models.CharField('Group',default=0,max_length=2)
     education = models.CharField('Education' ,default='0', max_length=10)
     similarity = models.CharField('Similarity' ,default='0', max_length=10)

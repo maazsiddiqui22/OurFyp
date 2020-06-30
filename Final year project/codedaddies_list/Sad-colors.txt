@@ -1,0 +1,37 @@
+for old people:
+yellow:
+#fff5cc
+#ffdb4d
+
+orange:
+#ffcc99
+#ff9933
+
+for adults:
+yellow:
+#ffe6b3
+#ffc34d
+
+orange:
+#ffb366
+#ff8c1a
+
+for young adults:
+yellow:
+#ffd480
+#ffb31a
+
+orange:
+#ffd699
+#ffad33
+
+for kids:
+orange:
+#ffc299
+#ff8533
+
+yellow:
+#ffeb99
+#ffcc00
+
+
