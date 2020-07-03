@@ -17,6 +17,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 
+def landing_page(request):
+    return render(request,'landingpage.html')
 
 def login(request):
 
@@ -25,18 +27,29 @@ def login(request):
         password = request.POST['password']
 
         count=Userlogin.objects.filter(email=email, password=password).count()
-        print(count)
+         
+       
+        group = Userlogin.objects.filter(email=email, password=password)
+        clusetr =0
+        for i in group:
+            clusetr = (( str(i).split(' ') )[0] )
+        
+        
         if count >0:
-            detect(request)
-            strn = 'home/website2'
+            det = detect(request)
+            print("mood + GROUP = ",det+clusetr)
             
-            print('should not run this')
-            return redirect(strn)
+            strn = 'home/website2'
+            y_light,y_dark,o_light,o_dark , size1,clr,size2 = getInterface(int(clusetr),det )
+            file= open('result.txt','w')
+            file.write(y_light+','+y_dark+','+o_light+','+o_dark+','+size1+','+clr+','+size2 )
+            return redirect('/home/website2')
+
 
         else:
             messages.error(request,'Invalid email or password')
 
-            return redirect('login.html')
+            return redirect('login')
    
     return render(request,'login.html')   
 
@@ -90,12 +103,14 @@ def clusteringKMEAN():
     import pickle
     print('clustering .. .. ..')
     data = pd.read_csv('data.csv')
-    max=data['Age'].max()
-    min=data['Age'].min()
-    array_age = normalize( data['Age'],max,min)
-    array_age = pd.DataFrame(array_age,columns=['Age'])
-    data2 = pd.concat([ data['Education'],array_age['Age'],data['Similarity'],data['Gender']],axis=1 )
-    clustering = KMeans(n_clusters=4, random_state=0).fit(data2)
+    # max=data['Age'].max()
+    # min=data['Age'].min()
+    # array_age = normalize( data['Age'],max,min)
+    # array_age = pd.DataFrame(array_age,columns=['Age'])
+    
+    data2 = data['Age'].to_numpy()
+    # print(data2.reshape(-1,1))
+    clustering = KMeans(n_clusters=4, random_state=0).fit(data2.reshape(-1,1))
     filename = 'finalized_model.pkl'
     pickle.dump(clustering, open(filename, 'wb'))
    
@@ -103,18 +118,17 @@ def clusteringKMEAN():
 
 def getCluster(education,age,smilarity,gender):
     import pickle
-    data = pd.read_csv('data.csv')
-    max=data['Age'].max()
-    min=data['Age'].min()
-    age = (max-age)/(max-min)
+    
     import os
 
-    if os.path.isfile('finalized_model.sav'):
+    if os.path.isfile('finalized_model.pkl'):
         pass
     else:
+        print('RE LEARNING KMEAN!!!!!!!!!!!!!!!!!!!')
         clusteringKMEAN()
+
     clustering = pickle.load(open('finalized_model.pkl', 'rb'))
-    result = clustering.predict([[education,age,smilarity,gender]])
+    result = clustering.predict([[age]])
         
     return result[0]
  
@@ -161,15 +175,16 @@ def detect(request):
     model.add(Dense(1024, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(7, activation='softmax'))
-    f = open('D:/django/codedaddies_list/codedaddies_list/userlogin/model.h5', 'r')
+    f = open('./userlogin/model.h5', 'r')
     myfile = File(f)
-    model.load_weights('D:/django/codedaddies_list/codedaddies_list/userlogin/model.h5')
+    model.load_weights('./userlogin/model.h5')
     
     # prevents openCL usage and unnecessary logging messages
     cv2.ocl.setUseOpenCL(False)
 
     # dictionary which assigns each label an emotion (alphabetical order)
-    emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
+    emotion_dict = {0: "Angry", 1: "Sad", 2: "Angry", 3: "Happy", 4: "Sad", 5: "Sad", 6: "Happy"}
+    # emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
 
     # start the webcam feed
     cap = cv2.VideoCapture(0)
@@ -177,9 +192,9 @@ def detect(request):
     # Find haar cascade to draw bounding box around face
     ret, frame = cap.read()
    
-    filename = open('D:/django/codedaddies_list/codedaddies_list/userlogin/haarcascade_frontalface_default.xml', 'r')
+    filename = open('./userlogin/haarcascade_frontalface_default.xml', 'r')
     myfile2 = File(filename)
-    facecasc = cv2.CascadeClassifier('D:/django/codedaddies_list/codedaddies_list/userlogin/haarcascade_frontalface_default.xml')
+    facecasc = cv2.CascadeClassifier('./userlogin/haarcascade_frontalface_default.xml')
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = facecasc.detectMultiScale(gray,scaleFactor=1.3, minNeighbors=5)
 
@@ -191,13 +206,12 @@ def detect(request):
         roi_gray = gray[y:y + h, x:x + w]
         cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray, (48, 48)), -1), 0)
         prediction = model.predict(cropped_img)
-        print(prediction)
+       
         maxindex = int(np.argmax(prediction))
-        print(maxindex)
-        print(emotion_dict[maxindex])
+        
         cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
-    cv2.imwrite('D:/Final Year Project/codedaddies_list/userlogin/c1.png',frame)
+    cv2.imwrite('c1.png',frame)
         
         
     #cv2.imshow('Video', cv2.resize(frame,(1600,960),interpolation = cv2.INTER_CUBIC))
@@ -207,41 +221,73 @@ def detect(request):
     #cap.release()
     #cv2.destroyAllWindows()
     
-    file= open('result.txt','w')
+    # file= open('result.txt','w')
     
 
-    if str(emotion_dict[maxindex]) == 'Happy':
+    # if str(emotion_dict[maxindex]) == 'Happy':
          
         
-        file.write("0277bd,")
-        file.write("ad1457,") 
-        file.write("Happy,")
-    elif str(emotion_dict[maxindex]) == 'Neutral':
+    #     file.write("0277bd,")
+    #     file.write("ad1457,") 
+    #     file.write("Happy,")
+    # elif str(emotion_dict[maxindex]) == 'Neutral':
         
-        file.write("4caf50,")
-        file.write("ad1457,")
-        file.write("Neutral,")
-        #print('neutral')
-    elif str(emotion_dict[maxindex]) == 'Angry':
+    #     file.write("4caf50,")
+    #     file.write("ad1457,")
+    #     file.write("Neutral,")
+    #     #print('neutral')
+    # elif str(emotion_dict[maxindex]) == 'Angry':
         
-        file.write("b71c1c,")
-        file.write("ad1457,") 
-        file.write("Angry,")
-    elif str(emotion_dict[maxindex]) == 'Sad':
-        file.write("fb8c00,")
-        file.write("ad1457, ") 
-        file.write("Sad,")
+    #     file.write("b71c1c,")
+    #     file.write("ad1457,") 
+    #     file.write("Angry,")
+    # elif str(emotion_dict[maxindex]) == 'Sad':
+    #     file.write("fb8c00,")
+    #     file.write("ad1457, ") 
+    #     file.write("Sad,")
            
     
-    elif str(emotion_dict[maxindex]) == 'Surprised':
-        file.write("b71c1c,") 
-        file.write("ad1457, ") 
-        file.write("Surprised,")
+    # elif str(emotion_dict[maxindex]) == 'Surprised':
+    #     file.write("b71c1c,") 
+    #     file.write("ad1457, ") 
+    #     file.write("Surprised,")
           
         
         
     
     return emotion_dict[maxindex]
+
+def getInterface(cluster,mood):
+
+    if cluster == 0:
+        if mood == 'Sad':
+            return '#ffeb99','#ffcc00','#ffc299','#ff8533','18','black','20'
+        elif mood =='Angry':
+            return '#99e6ff','#33ccff','#66ffb3','#00e673','18','black','20'
+        else:
+            return '#a517ba', '#5f1782','#a517ba', '#5f1782','18','black','20'
+    elif cluster ==1:
+        if mood == 'Sad':
+            return '#ffe6b3','#ffc34d','#ffb366','#ff8c1a','16','black','18'
+        elif mood =='Angry':
+            return '#b3ecff','#4dd2ff','#b3ffe0','#4dffb8','16','black','18'
+        else:
+            return '#a517ba', '#5f1782','#a517ba', '#5f1782','16','black','18'
+    elif cluster == 2:
+        if mood == 'Sad':
+            return '#fff5cc','#ffdb4d','#ffcc99','#ff9933','20','black','22'
+        elif mood =='Angry':
+            return '#ccebff','#66c2ff','#ccffdd','#66ff99','20','black','22'
+        else:
+            return '#a517ba', '#5f1782','#a517ba', '#5f1782','20','black','22'
+    elif cluster ==  3:
+        if mood == 'Sad':
+            return '#ffd480','#ffb31a','#ffd699','#ffad33','16','black','18'
+        elif mood =='Angry':
+            return '#99ddff','#33bbff','#b3ffd9','#33ff99','16','black','18'
+        else:
+            return '#a517ba', '#5f1782','#a517ba', '#5f1782','16','black','18'
+
 
  
 

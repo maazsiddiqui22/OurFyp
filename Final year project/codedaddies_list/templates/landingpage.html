@@ -18,7 +18,10 @@
             padding: 0;
         }
 
-        
+        body
+        {
+            font-family: sans-serif;
+        }
 
         #nav-bar
         {
@@ -42,7 +45,7 @@
         .navbar-nav li
         {
             margin-top: 5px;
-            padding: 0 7px;
+            padding: 0 10px;
         }
 
         .navbar-nav li a
@@ -54,8 +57,10 @@
         }
         .nav-register
         {
-            margin-left: 700px; 
+            margin-left: 750px; 
         }
+        
+
         .fa-bars
         {
             color: #fff;
@@ -65,14 +70,7 @@
         {
             outline: none !important;
         }
-
-        .navbar-nav .btn-primary
-        {
-            box-shadow: none;
-            border: none;
-            border-radius: 0;
-            
-        }
+        
 
         /*--Banner Section */
 
@@ -328,10 +326,6 @@
             text-align: center;
             padding-top: 7px;
         }
-        .footer-box .contact-details 
-        {
-            font-size: 15px;
-        }
         .footer-box b
         {
             margin-left: 50px;
@@ -364,40 +358,24 @@
             padding-bottom: 20px;
             text-align: center;
         }
-        .nav-link, a,body, h2
-        {
-            
-            font-size: {{fontsize}}px;
-            color: {{fontcolor}} !important;
-        }
-        .btn-primary
-        {
-            font-size: {{butnsize}}px ;
-        }
-        #services .btn-primary, #about-us, .footer-box .btn-primary,#footer, .navbar, #banner, #nav-bar .btn-primary{
-            background-image: linear-gradient(to right,  {{light}},  {{dark}});
-            color: {{fontcolor}} !important;
+        
+        #services .btn-primary, #about-us, .footer-box .btn-primary,#footer, .navbar, #banner{
+            background-image: linear-gradient(to right,  #a517ba,  #5f1782);
+            color: white !important;
             
         }
-        #about-us .about-heading{
-            color: {{fontcolor}} !important;
-        }
-        /* .nav-link, a{
+        .nav-link, a{
             color: white!important;
             font-weight: 100;
-        } */
-        h2,h1{
-            color:black !important;
         }
+
         .testimonials{
-            border-left: {{dark}}!important;
+            border-left: #5f1782 !important;
             margin-top: 50px;
             margin-bottom: 50px;
-            color: black !important;
         }
         .title2::before, .title2::after, .title::before, .title::after{
-            background: {{dark}};
-            
+            background: #5f1782;
         }
     </style>
     <body>
@@ -426,27 +404,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#footer">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        
-                    </li>
-                    <li class="nav-item">
-                        <!-- <a class="nav-link border" href="#footer">Change Layout</a> -->
-                        
-                            {% csrf_token %}
-                     <form action="{% url 'changeurl' %}" method="POST">
-                     {% csrf_token %}
-                            <!-- input type="submit " id='bttn2' name = 'bttn2' value={{light}} -- >- -->
-                            <button type="submit" id='bttn2' class="btn btn-primary" name = 'bttn2' value={{light}}>Change Layout</button>
-                        </form>
-                        
-                    </li>
-
                     <li class="nav-register">
-                        <a class="nav-link ml-auto" href="{%url 'landing_page'%}">Sign out</a>
+                        <a class="nav-link ml-auto" href="{%url 'login'%}">Sign in</a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link ml-auto" href="{% url 'signup'%}" >Sign up</a>
                     </li>
                   </ul>
-
-
                 </div>
               </nav>
         </section>
@@ -522,7 +486,7 @@
         <!-- About Us -->
         <section id="about-us">
             <div class="container">
-                <h1 class="title2 text-center about-heading">WHY CHOOSE US?</h1>
+                <h1 class="title2 text-center">WHY CHOOSE US?</h1>
                 <div class="row">
                     <div class= "col-md-6">
                         <p class="about-title">Why we're different</p>
@@ -593,15 +557,15 @@
                     </div>
                     <div class="col-md-4 footer-box">
                         <p><b>CONTACT US</b></p>
-                        <p class="contact-details"> <i class="fa fa-map-marker"></i>  Pak Tower, Karachi, Pakistan</p>
-                        <p class="contact-details"> <i class="fa fa-phone"></i> +92-3122122758</p>
-                        <p class="contact-details"> <i class="fa fa-envelope-o"></i> msiddiqui.13166@khi.iba.edu.pk</p>
+                        <p> <i class="fa fa-map-marker"></i>  Pak Tower, Karachi, Pakistan</p>
+                        <p> <i class="fa fa-phone"></i>  +92-3122122758</p>
+                        <p> <i class="fa fa-envelope-o"></i>  msiddiqui.13166@khi.iba.edu.pk</p>
                         
                     </div>
                     <div class="col-md-4 footer-box">
-                        <p><b>NEWSLETTER</b></p>
+                        <p><b>SUBSCRIBE TO THE NEWS LETTER</b></p>
                         <input type="email" class="form-control" placeholder="Your Email">
-                        <button type="button" class="btn btn-primary">SUBSCRIBE</button>
+                        <button type="button" class="btn btn-primary">Subscribe</button>
                         
                     </div>
                 </div>
@@ -615,22 +579,7 @@
         <script>
             var scroll = new SmoothScroll('a[href*="#"]');
         </script> -->
-        <script>
-            function dosomething(val){
-                var number1=document.getElementById("bttn1").value; 
-                var number2=document.getElementById("bttn2").value; 
-                if (val ==number1){
-                   
-                    console.log(number2)
-                }
-                
-                else {
-                    
-                    console.log(number1)
-                }
-            
-            }
-        </script>
+        
 
     </body>
 </html>

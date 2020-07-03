@@ -1,37 +1,51 @@
-for old people:
+for old people: cluster 2
+font-size: font-color: button-size:
+20, black, 22
 yellow:
 #fff5cc
 #ffdb4d
 
+font-size: 20, font-color: black, button-size: 22
 orange:
 #ffcc99
 #ff9933
 
-for adults:
+for adults: cluster  1
+font-size: 16, font-color: black, button-size: 18
 yellow:
 #ffe6b3
 #ffc34d
 
+font-size: 16, font-color: white, button-size: 18
 orange:
 #ffb366
 #ff8c1a
 
-for young adults:
+for young adults: cluster 3
+
+
+16, white, 18
+font-size: 16, font-color: white, button-size: 18
 yellow:
 #ffd480
 #ffb31a
-
+font-size: 16, font-color: white, button-size: 18
 orange:
 #ffd699
 #ffad33
 
-for kids:
-orange:
-#ffc299
-#ff8533
+for kids: cluster 0
+18, black, 20
+
 
 yellow:
 #ffeb99
 #ffcc00
+18, black, 20
+orange:
+#ffc299
+#ff8533
+
+
 
 

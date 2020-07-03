@@ -1,0 +1,72 @@
+{% load staticfiles %}
+{% load static %}
+
+<html>
+    <head>
+        <title>Agency Website</title>
+        <!-- <link rel= "stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link rel= "stylesheet" href= https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
+    </head>
+    <body>
+        <div class="nav-wrapper">
+            <div class="left-side">
+                <div class="brand">
+                    <div> <img src="{% static 'logo2.png' %}"> </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="nav-link-wrapper active-nav-link">
+                    <a href="index.html">Sign in</a>
+                </div>
+                <div class="nav-link-wrapper ">
+                    <a href="about.html">Sign up</a>
+                </div>
+            </div>
+            
+        </div>
+        <div class='card'>
+            <h1>Which interface suits your mood?</h1>
+
+
+            {% csrf_token %}
+                <form action="{% url 'website2a' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <input type="number" class="form-control"  name = "option1" >
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                </form>
+        </div>
+        <div class='row'>
+            <div >
+                <img class ='w-50 image1' src='{% static "orange-option.png" %}'>
+             
+            </div>
+            <div >
+                <img class =' w-50 image2 '  src='{% static "yellow-option.png" %}'>
+            </div>
+        </div>
+        
+    </body>
+    <style>
+
+        .card{
+            display: flex;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .row{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0;
+        }
+        .image1{
+            width: 100%;
+            height: 100%;
+            margin-left: 350px;
+        }
+    </style>
+</html>
+
