@@ -70,7 +70,12 @@ def register_user(request):
        similarity = request.POST['similarity']
        domain = request.POST['domain']
        education = request.POST['education']
-       age =2020-int(dob)
+       import datetime
+
+       x = datetime.datetime.now()
+
+
+       age =int(x.strftime("%Y"))-int(dob)
        if('y' in similarity or 'Y' in similarity):
            similarity='1'
            print((int(education),age,0,int(gender)))
@@ -202,14 +207,19 @@ def detect(request):
     #ret,frame = cap.read() # return a single frame in variable `frame`
     
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y-50), (x+w, y+h+10), (255, 0, 0), 2)
-        roi_gray = gray[y:y + h, x:x + w]
-        cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray, (48, 48)), -1), 0)
-        prediction = model.predict(cropped_img)
-       
-        maxindex = int(np.argmax(prediction))
         
-        cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        try:
+            cv2.rectangle(frame, (x, y-50), (x+w, y+h+10), (255, 0, 0), 2)
+            roi_gray = gray[y:y + h, x:x + w]
+            cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray, (48, 48)), -1), 0)
+            prediction = model.predict(cropped_img)
+
+            maxindex = int(np.argmax(prediction))
+            
+            cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            break
+        except:
+            redirect('login')
 
     cv2.imwrite('c1.png',frame)
         
@@ -261,32 +271,32 @@ def getInterface(cluster,mood):
 
     if cluster == 0:
         if mood == 'Sad':
-            return '#ffeb99','#ffcc00','#ffc299','#ff8533','18','black','20'
+            return '#ffeb99','#ffcc00','#ffc299','#ff8533','19','black','20'
         elif mood =='Angry':
-            return '#99e6ff','#33ccff','#66ffb3','#00e673','18','black','20'
+            return '#99e6ff','#33ccff','#66ffb3','#00e673','19','black','20'
         else:
-            return '#a517ba', '#5f1782','#a517ba', '#5f1782','18','black','20'
+            return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','19','white','20'
     elif cluster ==1:
         if mood == 'Sad':
-            return '#ffe6b3','#ffc34d','#ffb366','#ff8c1a','16','black','18'
+            return '#ffe6b3','#ffc34d','#ffb366','#ff8c1a','18','black','19'
         elif mood =='Angry':
-            return '#b3ecff','#4dd2ff','#b3ffe0','#4dffb8','16','black','18'
+            return '#b3ecff','#4dd2ff','#b3ffe0','#4dffb8','18','black','19'
         else:
-            return '#a517ba', '#5f1782','#a517ba', '#5f1782','16','black','18'
+            return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','18','white','19'
     elif cluster == 2:
         if mood == 'Sad':
             return '#fff5cc','#ffdb4d','#ffcc99','#ff9933','20','black','22'
         elif mood =='Angry':
             return '#ccebff','#66c2ff','#ccffdd','#66ff99','20','black','22'
         else:
-            return '#a517ba', '#5f1782','#a517ba', '#5f1782','20','black','22'
+            return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','20','white','22'
     elif cluster ==  3:
         if mood == 'Sad':
-            return '#ffd480','#ffb31a','#ffd699','#ffad33','16','black','18'
+            return '#ffd480','#ffb31a','#ffd699','#ffad33','17','black','17'
         elif mood =='Angry':
-            return '#99ddff','#33bbff','#b3ffd9','#33ff99','16','black','18'
+            return '#99ddff','#33bbff','#b3ffd9','#33ff99','17','black','17'
         else:
-            return '#a517ba', '#5f1782','#a517ba', '#5f1782','16','black','18'
+            return '#bf00ff', '#5f1782','##bf00ff', '#5f1782','17','white','17'
 
 
  

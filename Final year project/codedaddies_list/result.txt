@@ -1,1 +1,1 @@
-#ffe6b3,#ffc34d,#ffb366,#ff8c1a,16,black,18
+#ffd480,#ffb31a,#ffd699,#ffad33,17,black,17
