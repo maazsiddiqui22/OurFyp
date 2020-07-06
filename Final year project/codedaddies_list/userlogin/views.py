@@ -273,14 +273,14 @@ def getInterface(cluster,mood):
         if mood == 'Sad':
             return '#ffeb99','#ffcc00','#ffcc99','#ff9933','19','black','20'
         elif mood =='Angry':
-            return '#99e6ff','#33ccff','#b3ffe0','#4dffb8','19','black','20'
+            return '#b3ecff','#4dd2ff','#b3ffe0','#4dffb8','19','black','20'
         else:
             return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','19','white','20'
     elif cluster ==1:
         if mood == 'Sad':
             return '#ffe6b3','#ffc34d','#ffb366','#ff8c1a','18','black','19'
         elif mood =='Angry':
-            return '#b3ecff','#4dd2ff','#b3ffd9','#33ff99','18','black','19'
+            return '#99e6ff','#33ccff','#b3ffd9','#33ff99','18','black','19'
         else:
             return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','18','white','19'
     elif cluster == 2:
