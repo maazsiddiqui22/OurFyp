@@ -1,7 +1,0 @@
-young adult: 3
-
-kids: 0
-
-old people: 2
-
-middle aged: 1
