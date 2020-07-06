@@ -271,32 +271,32 @@ def getInterface(cluster,mood):
 
     if cluster == 0:
         if mood == 'Sad':
-            return '#ffeb99','#ffcc00','#ffc299','#ff8533','19','black','20'
+            return '#ffeb99','#ffcc00','#ffcc99','#ff9933','19','black','20'
         elif mood =='Angry':
-            return '#99e6ff','#33ccff','#66ffb3','#00e673','19','black','20'
+            return '#99e6ff','#33ccff','#b3ffe0','#4dffb8','19','black','20'
         else:
             return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','19','white','20'
     elif cluster ==1:
         if mood == 'Sad':
             return '#ffe6b3','#ffc34d','#ffb366','#ff8c1a','18','black','19'
         elif mood =='Angry':
-            return '#b3ecff','#4dd2ff','#b3ffe0','#4dffb8','18','black','19'
+            return '#b3ecff','#4dd2ff','#b3ffd9','#33ff99','18','black','19'
         else:
             return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','18','white','19'
     elif cluster == 2:
         if mood == 'Sad':
-            return '#fff5cc','#ffdb4d','#ffcc99','#ff9933','20','black','22'
+            return '#fff5cc','#ffdb4d','#ffd699','#ffad33','20','black','22'
         elif mood =='Angry':
             return '#ccebff','#66c2ff','#ccffdd','#66ff99','20','black','22'
         else:
             return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','20','white','22'
     elif cluster ==  3:
         if mood == 'Sad':
-            return '#ffd480','#ffb31a','#ffd699','#ffad33','17','black','17'
+            return '#ffd480','#ffb31a','#ffc299','#ff8533','17','black','17'
         elif mood =='Angry':
-            return '#99ddff','#33bbff','#b3ffd9','#33ff99','17','black','17'
+            return '#99ddff','#33bbff','#66ffb3','#00e673','17','black','17'
         else:
-            return '#bf00ff', '#5f1782','##bf00ff', '#5f1782','17','white','17'
+            return '#bf00ff', '#5f1782','#bf00ff', '#5f1782','17','white','17'
 
 
  
