@@ -1,0 +1,617 @@
+{% load staticfiles %}
+{% load static %}
+
+<html>
+    <head>
+        <title>Agency Website</title>
+        <!-- <link rel= "stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link rel= "stylesheet" href= https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
+    </head>
+    <style>
+        
+    
+
+        #nav-bar
+        {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar
+        {
+            padding: 0 ;
+        }
+
+        .navbar-brand img
+        {
+            height: 160px;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        .navbar-nav li
+        {
+            margin-top: 5px;
+            padding: 0 7px;
+        }
+
+        .navbar-nav li a
+        {
+            color: #fff ;
+            font-weight: 600;
+            float: right;
+            text-align: left;
+        }
+        .fa-bars
+        {
+            color: #fff;
+            font-size: 30px;
+        }
+        .navbar-toggler
+        {
+            outline: none !important;
+        }
+
+        .navbar-nav .btn-primary
+        {
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            
+        }
+
+        /*--Banner Section */
+
+        #banner
+        {
+            color: #fff;
+            margin-bottom: 100px;
+            
+        }
+        .row .banner-title{
+            margin-left: -50px
+        }
+        .promo-title
+        {
+            font-size: 40px;
+            font-weight: 600;
+            margin-top: 100px;
+        }
+
+        .play-btn
+        {
+            width: 55px;
+            margin: 10px;
+            margin-right: 0px;
+
+        }
+        #banner a
+        {
+            color: #fff;
+            text-decoration: none;
+            
+        }
+        .img-fluid
+        {
+            width: 400px;
+            margin: 25px;
+        }
+        .bottom-img
+        {
+            width: 100%;
+            height: 60%;
+            
+        }
+        .slide{
+            margin-left: 50px;
+        }
+
+        
+        /* Services Section */
+
+        #services
+        {
+            margin-top: -200px;
+            padding: 80px 0;
+        }
+        .service-img
+        {
+            width: 200px;
+            margin-top: 20px;
+        }
+
+        .services
+        {
+            padding: 20px;
+        }
+        .services h4
+        {
+            padding: 5px;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+        .title 
+        {
+            margin-top: -150px ;
+            padding-bottom: 15px;
+        }
+        .title::before
+        {
+            content: '';
+            
+            height: 5px;
+            width: 200px;
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+            transform: translateY(63px);
+            
+        }
+        .title::after
+        {
+            content: '';
+            
+            height: 10px;
+            width: 50px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 40px;
+            display: block;
+            transform: translateY(8px);
+        }
+
+        #services .btn-primary
+        {
+            box-shadow: none;
+            padding: 8px 25px;
+            border: none;
+            border-radius: 20px;
+            
+        }
+
+
+
+        .title2::before
+        {
+            content: '';
+            
+            height: 5px;
+            width: 200px;
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+            transform: translateY(63px);
+            
+        }
+        .title2::after
+        {
+            content: '';
+            
+            height: 10px;
+            width: 50px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 40px;
+            display: block;
+            transform: translateY(8px);
+        }
+
+        /*About us section*/
+
+        #about-us
+        {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .about-title
+        {
+            font-size: 30px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        .about-img
+        {
+            width: 400px;
+            height: 400px;
+            margin-top: -50px;
+           
+        
+        }
+        #about-us ul li
+        {
+            margin: 10px 0px;
+        }
+
+        /* Testimonials section */
+
+        #testimonials
+        {
+            margin: 100px 0px;
+        }
+
+
+        .testimonials img
+        {
+            height: 100px;
+            width: 100px;
+            margin: 0 10px;
+            border-radius: 50%;
+            
+        }
+        .person-name
+        {
+            font-size: 15px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Social Media Section */
+
+        #social-media 
+        {
+            background-color: #f8f9fa ;
+            padding: 100px 0px;
+        }
+        #social-media p
+        {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 30px;    
+        }
+
+        .socialmedia-icons img
+        {
+            width: 60px;
+            transition-duration: 0.5s;
+            margin: 5px;
+        }
+        .socialmedia-icons .whatsapp
+        {
+            width: 90px;
+            
+        }
+
+        .socialmedia-icons a:hover img
+        {
+            transform: translateY(-15px);
+        }
+
+        /* Footer Section */
+
+        #footer
+        {
+            
+            color: #fff;
+            padding-top: 5%;
+            
+        }
+        .footer-box
+        {
+            padding: 20px;
+        }
+        .footer-box img
+        {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        .footer-box .fa 
+        {
+            margin-right: 8px;
+            font-size: 25px;
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            padding-top: 7px;
+        }
+        .footer-box .contact-details 
+        {
+            font-size: 15px;
+        }
+        .footer-box b
+        {
+            margin-left: 50px;
+        }
+
+        .footer-box .form-control
+        {
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            margin-top: 20px;
+            
+        }
+        .footer-box .btn-primary
+        {
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            margin-top: 20px;
+        }
+
+        hr
+        {
+            background-color: white;    
+        }
+
+        .copywrite
+        {
+            margin-bottom: 0px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        .nav-link, a,body, h2
+        {
+            
+            font-size: {{fontsize}}px;
+            color: {{fontcolor}} !important;
+        }
+        .btn-primary
+        {
+            font-size: {{butnsize}}px ;
+        }
+        #services .btn-primary, #about-us, .footer-box .btn-primary,#footer, .navbar, #banner, #nav-bar .btn-primary{
+            background-image: linear-gradient(to right,  {{light}},  {{dark}});
+            color: {{fontcolor}} !important;
+            
+        }
+        #about-us .about-heading{
+            color: {{fontcolor}} !important;
+        }
+        /* .nav-link, a{
+            color: white!important;
+            font-weight: 100;
+        } */
+        h2,h1{
+            color:black !important;
+        }
+        .testimonials{
+            border-left: {{dark}}!important;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            color: black !important;
+        }
+        .title2::before, .title2::after, .title::before, .title::after{
+            background: {{dark}};
+            
+        }
+    </style>
+    <body>
+        <section id= "nav-bar">
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#"><img src= "{% static 'logo2.png' %}"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#top">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#about-us">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        
+                    </li>
+                    <li class="nav-item">
+                        <!-- <a class="nav-link border" href="#footer">Change Layout</a> -->
+                        
+                            {% csrf_token %}
+                     <form action="{% url 'changeurl' %}" method="POST">
+                     {% csrf_token %}
+                            <!-- input type="submit " id='bttn2' name = 'bttn2' value={{light}} -- >- -->
+                            <button type="submit" id='bttn2' class="btn btn-primary" name = 'bttn2' value={{light}}>Change Layout</button>
+                        </form>
+                        
+                    </li>
+
+                    <li class="nav-register">
+                        <a class="nav-link ml-auto" href="{%url 'landing_page'%}">Sign out</a>
+                    </li>
+                  </ul>
+
+
+                </div>
+              </nav>
+        </section>
+
+        <!-- Banner Section-->
+        <section id="banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 banner-title">
+                        <p class="promo-title">ADAPTIVE USER INTERFACE</p>
+                        <p>Emotions rule so much of our lives. Even writers and poets seem incapable of describing the full range and experience of human emotions. This is what our project idea circulates around. The idea is to detect the user’s emotion and then develop a strategy to amplify/maintain (in case of a positive emotion) or to change that emotion. </p>
+                        <a href="https://www.youtube.com/watch?v=v0IgI8vYD_o"><img src="{% static 'play.png' %}" class="play-btn"> Watch tutorial</a>
+                    </div>
+                    <div id="carouselExampleIndicators" class="carousel slide col-md-5  " data-ride="carousel">
+                        
+                            <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{% static 'carousel1.png' %}" style="width:100% ; height: 400px">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'carousel2.png' %}" style="width:100%; ; height: 400px">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'carousel4.png' %}" style="width:100% ; height: 400px">
+                            </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                                </a>
+                    </div>
+                </div>
+                
+            </div>
+            <img src="{% static 'wave1.png' %}" class="bottom-img">
+        </section>
+
+        <!---Services Section-->
+        <section id="services" >
+            <div class="col-12 text-center pb-5">
+                <h1 class="title">WHAT WE DO?</h1>
+                <div class="row ">
+                    <div class=" col-12 col-sm-12 col-md-4 services">
+                        <img src="{% static 'marketing.png' %}" class="service-img">
+                        <h4>Growth Marketing</h4>
+                        <p>This is the step where market value is identified and then results are stored.</p>
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4  services">
+                        <img src="{% static 'brand.png' %}" class="service-img">
+                        <h4>Online Branding</h4>
+                        <p>Internet branding is a brand management technique that uses the World Wide Web & Social Media Channels </p>
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 services">
+                        <img src="{% static 'ads.png' %}" class="service-img">
+                        <h4>Animated Ads</h4>
+                        <p> An animated ad is a 5-10 second looped image or video which is used in online marketing.</p>
+
+                    </div>
+                    
+
+                </div>
+                <button type ="button" class="btn btn-primary" >All services</button>
+            </div>
+
+        </section>
+
+
+        <!-- About Us -->
+        <section id="about-us">
+            <div class="container">
+                <h1 class="title2 text-center about-heading">WHY CHOOSE US?</h1>
+                <div class="row">
+                    <div class= "col-md-6">
+                        <p class="about-title">Why we're different</p>
+                        <ul>
+                            <li>We believe in doing business with honesty</li>
+                            <li>Use social media</li>
+                            <li>Create video tutorials</li>
+                            <li>Start blogging now</li>
+                            <li>Understand search engine optimization</li>
+                            <li>Leverage influencers</li>
+                        </ul>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'about.png' %}"class="about-img" >
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Testimonials-->
+        <section id="testimonials">
+            <div class="container">
+                <h1 class="title2 text-center">WHAT CLIENTS SAY</h1>
+                <div class="row offset-1">
+                    <div class="col-md-5 testimonials">
+                        <p>Working towards such goals, you may find that what has worked a year ago and brought several thousand new leads is no longer working.</p>
+                        <img src="{% static 'client1.png' %}"class="client-img" >
+                        <p class= "person-name"><br> Mark Haniggan, Co-founder HCP </br></p>
+                    </div>
+                    <div class="col-md-5 testimonials">
+                        <p>Working towards such goals, you may find that what has worked a year ago and brought several thousand new leads is no longer working.</p>
+                        <img src="{% static 'client2.png' %}" class="client-img" >
+                        <p class= "person-name"><br> John Doe, Director ATTN </br></p>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--Social Media Section-->
+        <section id="social-media">
+            <div class="container text-center">
+                <p>FIND US ON SOCIAL MEDIA
+                    <div class="socialmedia-icons">
+                        <a href="https://facebook.com"><img src="{% static 'facebook-icon.png' %}"></a>
+                        <a href="https://twitter.com"><img src="{% static 'twitter-icon.png' %}"></a>
+                        <a href="https://instagram.com"><img src="{% static 'instagram-icon.png' %}"></a>
+                        <a href="https://whatsapp.com"><img src="{% static 'whatsapp-icon.png' %}" class="whatsapp"></a>
+                        <a href="https://linkedin.com"><img src="{% static 'linkedin.png' %}"></a>
+                    </div>
+                    
+                </p>
+            </div>
+        </section>
+        
+        <!--Footer Section-->
+        <section id="footer">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-4 footer-box">
+                        <img src="{% static 'logo2.png' %}" >
+                        <p>I created this website for practice in order to learn how to create a website using html, css and bootstrap.</p>
+
+                    </div>
+                    <div class="col-md-4 footer-box">
+                        <p><b>CONTACT US</b></p>
+                        <p class="contact-details"> <i class="fa fa-map-marker"></i>  Pak Tower, Karachi, Pakistan</p>
+                        <p class="contact-details"> <i class="fa fa-phone"></i> +92-3122122758</p>
+                        <p class="contact-details"> <i class="fa fa-envelope-o"></i> msiddiqui.13166@khi.iba.edu.pk</p>
+                        
+                    </div>
+                    <div class="col-md-4 footer-box">
+                        <p><b>NEWSLETTER</b></p>
+                        <input type="email" class="form-control" placeholder="Your Email">
+                        <button type="button" class="btn btn-primary">SUBSCRIBE</button>
+                        
+                    </div>
+                </div>
+                <hr>
+                <p class="copywrite">Created by MAM</p>
+            </div>
+        </section>
+        
+        <!--Smooth scroll-->
+        <!-- <script src="smooth-scroll.js"></script>
+        <script>
+            var scroll = new SmoothScroll('a[href*="#"]');
+        </script> -->
+        <script>
+            function dosomething(val){
+                var number1=document.getElementById("bttn1").value; 
+                var number2=document.getElementById("bttn2").value; 
+                if (val ==number1){
+                   
+                    console.log(number2)
+                }
+                
+                else {
+                    
+                    console.log(number1)
+                }
+            
+            }
+        </script>
+
+    </body>
+</html>

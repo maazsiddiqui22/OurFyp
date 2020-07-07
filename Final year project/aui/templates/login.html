@@ -1,0 +1,101 @@
+{% load staticfiles %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Agency Website</title>
+        <!-- <link rel= "stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link rel= "stylesheet" href= https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
+    </head>
+<style type="text/css">
+	
+	body{
+        background: url("https://res.cloudinary.com/finnhvman/image/upload/v1541930411/pattern.png");
+    }
+    
+    .login-form {
+		width: 360px;
+    	margin: 50px auto;
+    	position: relative;
+        
+        border: none;
+        
+        
+	}
+    .login-form form {
+    	margin-bottom: 20px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        background-image: linear-gradient(to right,#bf00ff, #730099);
+        max-width: 400px;
+    }
+    .login-form h1 {
+        color: white;
+    }
+    .form2{
+        margin-top: 30px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {
+        margin-top: 30px;        
+        font-size: 20px;
+        font-weight: bold;
+        background-image: linear-gradient(to right,#4d0066, #4d0066);
+        border: none;
+        
+    }
+    
+    .savers{
+        color: white
+    }
+    .alignment1{
+        margin-top: 15px;
+        
+    }
+    .savers1{
+        color: black;
+    }
+    .image1{
+        width: 400px;
+    }
+    
+</style>
+</head>
+
+<body>
+
+<div class='row container mx-auto'>
+    <div class="col-sm-12 col-md-6 image1">
+        <img src="{% static 'logo2.png' %}">
+    </div>
+    <div class="login-form  col-sm-12 col-md-6">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <h1 class="text-center"> Sign in</h1>       
+            <div class="form-group">
+                <input type="text" class="form-control form1" placeholder="Email" name = "email" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control form2" placeholder="Password" name = "password"  required="required">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </div>
+            <div class="clearfix">
+                <label class="pull-left checkbox-inline savers alignment1" style="font-size: 15px;"><input type="checkbox"> Remember me</label>
+                <a href="#" class="pull-right savers alignment1" style="font-size: 15px;">Forgot Password?</a>
+            </div>        
+        </form>
+        <p class="text-center"><a class="" style="font-size: 16.5px;" href="{% url 'signup'%}">Don't have an account? Create one</a></p>
+    </div>
+</div>
+</body>
+</html>

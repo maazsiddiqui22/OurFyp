@@ -1,0 +1,132 @@
+{% load staticfiles %}
+{% load static %}
+
+
+<html>
+    <head>
+        <title>Agency Website</title>
+        <!-- <link rel= "stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link rel= "stylesheet" href= https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
+    </head>
+<style type="text/css">
+    
+    
+    body {
+        background: url("https://res.cloudinary.com/finnhvman/image/upload/v1541930411/pattern.png");   
+    } 
+	
+    .login-form form {
+    	margin-bottom: 20px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+
+        padding-bottom: 5px;
+        background-image: linear-gradient(to right,#bf00ff, #730099);
+        max-width: 450px;
+    }
+    
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+        background-image: linear-gradient(to right,#4d0066, #4d0066);
+        border: none;
+    }
+    .textcolor {
+        color: white;
+    }
+    .img{
+        height: 400px;
+    }
+  
+  
+   
+    
+</style>
+</head>
+
+
+<body>
+    <div class=' row mx-auto'>
+        <div class='col-sm-12 col-md-5 p-0'>
+            <img class ='img ' src="{% static 'logo2.png' %}">
+        </div>
+        <div class=' col-sm-12 col-md-6   mx-auto'>
+            <div class="login-form justify-content-end mt-3">
+                {% csrf_token %}
+                <form action="{% url 'register_user' %}" method="POST">
+                    {% csrf_token %}
+                    <h1 class="text-center textcolor">Sign up</h1>       
+                    <div class="form-group">
+                        <label class="textcolor" for="username">Username:</label>
+                        <input type="text" class="form-control" name="username" placeholder="Username" >
+                    </div>
+                    <div class="form-group">
+                        <label class="textcolor" for="Country">Country:</label>
+                        <input type="text" class="form-control" name="country" placeholder="Where do you live" >
+                    </div>
+                    <div class="form-group ">
+                        <label class="textcolor" for="Domain">Domain:</label>
+                        <select  class='form-group' name="domain" id="domain">
+                            <option value="0">Unemployed</option>  
+                            <option value="1">Business</option>
+                            <option value="2">Job</option>            
+                        </select>
+                    </div>
+        
+                    <div class="form-group">
+                        <label class="textcolor" for="Education">Education:</label>
+                        <select  class='form-group' name="education" id="education">
+                            <option value="0">School</option>
+                            <option value="1">College</option> 
+                            <option value="2">Under-grad</option>
+                            <option value="3">Masters</option> 
+                            <option value="4">PhD</option>            
+                        </select>
+                    </div>
+        
+                    <div class="form-group">
+                        <label class="textcolor" for="BirthDay">Date of birth:</label>
+                        <input type="date" class="form-control"  name="dob">
+                    </div>
+                    <div class='form-group gender1'>
+                        <label class="textcolor" for="gender">Gender:</label>
+                        <select  class='form-group' name="gender" id="gender">
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>            
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="textcolor" for="Email">Email:</label>
+                        <input type="email" class="form-control" name="email" placeholder="Email" >
+                    </div>
+                    <div class="form-group">
+                        <label class="textcolor" for="password">Password:</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" >
+                    </div>
+                    <div class="form-group">
+                        <label class="textcolor" for="similarity"> Have you used any similar website? </label>
+                        <input type="text" class="form-control" name="similarity" placeholder="Yes" >
+                    
+                        
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block signbtn">Sign up</button>
+                    </div>
+                        
+                </form>
+                <p class="text-center "><a  style="font-size: 17px;" href="{%url 'login'%}">Already have an account?</a></p>
+            </div>
+        
+        </div>
+    </div>
+</body>
+
+</html>
